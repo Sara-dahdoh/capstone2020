@@ -8,7 +8,6 @@ import unittest
 from mock import patch
 import json
 
-
 URL = "https://api.data.gov:443/regulations/v3/documents.json"
 load_dotenv()
 api_key = os.getenv("KEY")

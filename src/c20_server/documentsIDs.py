@@ -20,7 +20,6 @@ def get_documents_ids(api_url, api_key, docket_id):
         return [], response.status_code
 
 
-
 def main():
     load_dotenv()
     docket_id = 'EPA-HQ-OAR-2011-0028'
