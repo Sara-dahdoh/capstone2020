@@ -13,10 +13,8 @@ def get_documents_ids(api_key, docket_id):
             documents = response.json().get('documents')
 
             documents_ids = [document['documentId'] for document in documents]
-
             return documents_ids, 200
-
-        else:
-            return [], response.status_code
     except Exception:
+        return [], response.status_code
+    else:
         return [], response.status_code
