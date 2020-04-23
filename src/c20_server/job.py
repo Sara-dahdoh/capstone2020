@@ -14,3 +14,31 @@ class DocumentsJob(namedtuple('DocumentsJob',
                                'end_date']
                               )):
     pass
+
+
+class DocumentJob(namedtuple('DocumentJob',
+                             ['job_id',
+                              'document_id'])):
+    pass
+
+
+class DocketJob(namedtuple('DocketJob',
+                           ['job_id',
+                            'docket_id'])):
+    pass
+
+
+class DownloadJob(namedtuple('DownloadJob',
+                             ['job_id',
+                              'folder_name',
+                              'file_name',
+                              'file_type',
+                              'url']
+                             )):
+    pass
+
+
+class NoneJob(namedtuple('NoneJob',
+                         ['job_id']
+                         )):
+    pass
