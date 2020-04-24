@@ -226,3 +226,34 @@ File: document.json
       }
     }
 }
+```
+
+#Client report failure
+
+a POST request is invoked by the client to the server. It returns a JSON file with information like client_id, job_id, and Massages to return failure endpoint in the server. The client can return a failure do to many reasons such as:
+* 400: Bad request
+* 401: Unauthorized
+* 404: Not found
+* 408: Request Timeout
+* 480: Temporarily Unavailable
+
+
+## JSON file definition
+
+* `client_id`: A unique identifier of the client returning the result.
+* `job_id`: ID of the current job object.
+* `Massages`: a string list contains description of the error
+
+## Examples for failure jobs
+
+* 400: Bad request
+  * Incorrect URL
+    Incorrect_URL = "https://api.data.gov:443/requlations/v3/download.json?"\"documentID=EPA-HQ-OAR-2011-0000-0108&contentType=pdf"
+
+    ```
+    {
+      'client_id': 'client14',
+      'job_id': 'job33',
+      'Masg': '400: Bad request'
+    }
+    ```
