@@ -60,7 +60,7 @@ File: document.json
           "agency": "Environmental Protection Agency",
           "agencyAcronym": "EPA",
           "cfrCitation": "40 CFR 98",
-        
+
           ...
 
           "internationalImpacts": {
@@ -78,9 +78,9 @@ File: document.json
   * Returns data concerning a document
   * Placed as a json file in the DocumentID folder
   * `jobs` field can contain a list of download jobs
-  * Note: `file_name` are retrieved from regulations.gov, not always the document_id 
+  * Note: `file_name` are retrieved from regulations.gov, not always the document_id
   * Note: If there are `attachments` then we can find `fileFormats` in the attachments.
-  If there are no `attachments` then `fileFormats`can be retrieved from the json directly 
+  If there are no `attachments` then `fileFormats`can be retrieved from the json directly
 
 ```
 {
@@ -98,7 +98,7 @@ File: document.json
           "allowLateComment": false,
           "commentDueDate": null,
           "effectiveDate": "2014-01-01T00:00:00-05:00",
-          
+
           ...
 
           "numItemsRecieved": {
@@ -112,7 +112,7 @@ File: document.json
         }
       }
     }
-  ] 
+  ]
   'jobs': [
     {
       'job_type': 'download',
@@ -163,7 +163,7 @@ File: document.json
         "title": "Medicare Program; Revised Civil Money Penalties, Assessments, Exclusions, and Related Appeals Procedures"
       }
     },
-    
+
               ...
 
     {
@@ -195,7 +195,7 @@ File: document.json
       'job_type': 'docket'
       'docket_id': 'EPA-HQ-OAR-2011-0028'
     },
-    
+
     ...
 
     {
@@ -210,14 +210,13 @@ File: document.json
   * Returns basic data concerning a download
   * Placed as a json file in the DocumentID folder
   * `<file_data>` is the actual binary data of the file
-  * Note: `file_name` are retrieved from regulations.gov, not always the document_id 
+  * Note: `file_name` are retrieved from regulations.gov, not always the document_id
 
- 
 ```
 {
   'client_id': 'client1',
   'job_id': 'job1',
-  'data': 
+  'data':
     {
       'folder_name': 'CMS/CMS-2005-0001/CMS-2005-0001-0001/',
       'file_name': 'test_file',
