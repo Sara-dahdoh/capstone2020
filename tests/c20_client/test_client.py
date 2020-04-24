@@ -44,13 +44,13 @@ def test_do_job_documents_endpoint_call():
                 'document_id': 'NBA-ABC'
             }
         ]
-        mock.post('http://capstone.cs.moravian.edu',
+        mock.post('http://capstone.cs.moravian.edu/return_result',
                   json={'client_id': CLIENT_ID,
                         'job_id': JOB_ID,
                         'data': data,
                         'jobs': job})
 
-        do_job()
+        do_job(API_KEY)
         history = mock.request_history
 
         assert len(history) == 3
@@ -63,29 +63,30 @@ def test_do_job_document_endpoint_call():
     with requests_mock.Mocker() as mock:
         mock.get('http://capstone.cs.moravian.edu/get_job',
                  json={'job_type': 'document', 'job_id': JOB_ID,
-                       'document_id': 'abc-123'})
+                       'document_id': 'NBA-ABC-123'})
         mock.get('https://api.data.gov:443/regulations/v3/document.json?' +
-                 'api_key=' + API_KEY + "&documentId=abc-123",
-                 json={'documents': [{
-                     "agencyAcronym": 'NBA',
-                     'fileFormats': 'url'}]
-                      })
+                 '&api_key=' + API_KEY + "&documentId=NBA-ABC-123",
+                 json={
+                     "agencyAcronym": {'value': 'NBA'},
+                     'fileFormats': ['url&contentType=pdf'],
+                     'docketId': {'value': 'NBA-ABC'},
+                     'documentId': {'value': 'NBA-ABC-123'}})
         data = [{
             'folder_name': 'NBA/NBA-ABC/NBA-ABC-123',
             'file_name': 'document.json',
             'data': {"agencyAcronym": 'NBA',
-                     'fileFormats': 'url'}
+                     'fileFormats': ['url&contentType=pdf']}
             }]
         jobs = [
-            'url'
+            'url&contentType=pdf'
         ]
-        mock.post('http://capstone.cs.moravian.edu',
+        mock.post('http://capstone.cs.moravian.edu/return_result',
                   json={'client_id': CLIENT_ID,
                         'job_id': JOB_ID,
                         'data': data,
                         'jobs': jobs})
 
-        do_job()
+        do_job(API_KEY)
         history = mock.request_history
 
         assert len(history) == 3
@@ -102,22 +103,22 @@ def test_do_job_docket_endpoint_call():
         mock.get("https://api.data.gov:443/" +
                  "regulations/v3/docket.json?api_key=" +
                  API_KEY + "&docketId=ABC",
-                 json={'documents': [{
+                 json={
                      "agencyAcronym": 'NBA',
-                     'information': 'some data'}]
-                      })
+                     'information': 'some data',
+                     'docketId': 'NBA-ABC'})
         data = [{
             'folder_name': 'NBA/NBA-ABC/',
             'file_name': 'docket.json',
             'data': {"agencyAcronym": 'NBA',
                      'information': 'some data'}
             }]
-        mock.post('http://capstone.cs.moravian.edu',
+        mock.post('http://capstone.cs.moravian.edu/return_result',
                   json={'client_id': CLIENT_ID,
                         'job_id': JOB_ID,
                         'data': data})
 
-        do_job()
+        do_job(API_KEY)
         history = mock.request_history
 
         assert len(history) == 3
@@ -132,4 +133,4 @@ def test_no_connection_made_to_server():
                  exc=True)
 
         with pytest.raises(NoConnectionError):
-            do_job()
+            do_job(API_KEY)
